@@ -1,3 +1,4 @@
+# This resource template for BigAnimal single node cluster to deployed into Azure BA  Hosted
 terraform {
   required_providers {
     biganimal = {
