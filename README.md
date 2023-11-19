@@ -49,3 +49,26 @@ export_BA_env_vars () {
 $> export_BA_env_vars ba-user1
 ba-user1 BA_BEARER_TOKEN and BA_API_URI are exported.
 TF_VAR_project_id terraform variable is also exported. Value is prj_0123456789abcdef
+```
+# Now let us start with Terraform code to deploy your first cluster. I'd recommend VSCODE for IDE for code managment.
+
+## Start with BigAnimal provider
+
+Step 1 : To install the BigAnimal provider, copy and paste this code into your Terraform configuration provider.tf file.
+
+```hcl
+terraform {
+  required_providers {
+    biganimal = {
+      source  = "EnterpriseDB/biganimal"
+      version = "0.6.1"
+    }
+  }
+}
+
+provider "biganimal" {
+  # Configuration options
+  ba_bearer_token = <redacted> // See Getting an API Token section for details
+  // ba_api_uri   = "https://portal.biganimal.com/api/v3" // Optional
+}
+```
