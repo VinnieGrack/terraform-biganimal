@@ -17,7 +17,7 @@ The provider is licensed under the [MPL v2](https://www.mozilla.org/en-US/MPL/2.
 biganimal credential create \
   --name "ba-user1"
 ```
-2. Add the following bash functions to your shellrc file (For example: `.bashrc` if you're using bash, `.zshrc` if you're using ZSH) and start a new shell.
+2. Add the following bash functions to your shellrc file (For example: `.bashrc` if you're using bash, `.zshrc` if you're using ZSH) and start a new shell. Or alternate you can copy this code into the terraform project folder under .profile file and use that as source for command line terminal by mapping the source e.g. source ./.profile
 ```bash
 ba_api_get_call () {
 	endpoint=$1
@@ -70,5 +70,49 @@ provider "biganimal" {
   # Configuration options
   ba_bearer_token = <redacted> // See Getting an API Token section for details
   // ba_api_uri   = "https://portal.biganimal.com/api/v3" // Optional
+}
+```
+## Let us declare data-sources and variable
+Step 2 : To declare data-sources, copy and paste this code into your Terraform configuration data-sources.tf file.
+```hcl
+data "biganimal_projects" "this" {
+  query = var.query
+}
+
+output "projects" {
+  value = data.biganimal_projects.this.projects
+}
+
+output "number_of_projects" {
+  value = length(data.biganimal_projects.this.projects)
+}
+
+variable "query" {
+  type        = string
+  description = "Query string for the projects"
+  default     = ""
+}
+```
+## Now, Let us define the BigAnimal cluster type. In this example using [Single node cluster example on Azure(BigAnimal's Cloud Account)](./resources/biganimal_cluster/single_node/bah_azure/resource.tf)
+Please take a look at various BigAnimal Cluster example listed public github url https://github.com/EnterpriseDB/terraform-provider-biganimal.git
+
+Step 3 : Simply copy and paste this code into your Terraform configuration resource.tf file.
+```hcl
+data "biganimal_projects" "this" {
+  query = var.query
+}
+
+output "projects" {
+  value = data.biganimal_projects.this.projects
+}
+
+output "number_of_projects" {
+  value = length(data.biganimal_projects.this.projects)
+}
+
+variable "query" {
+  type        = string
+  description = "Query string for the projects"
+  default     = ""
 }
 ```
