@@ -209,7 +209,7 @@ export_BA_env_vars () {
 	echo "TF_VAR_project_id terraform variable is also exported. Value is $TF_VAR_project_id"
 }
 ```
-3. Now, If you have paste the code in step 2 into .profile file under terraform project, then you can use `source ./.profile` command to to use code above in your current terminal.
+3. Now, If you have pasted the code from step 2 into .profile file under terraform project, then you can use `source ./.profile` command to to use code above in your current terminal. Otherwise, use `.bashrc` if you're using bash, `.zshrc` profile for source option.
    
 ```console
 source ./.profile
