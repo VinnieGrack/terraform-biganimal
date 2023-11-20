@@ -28,19 +28,19 @@ The provider is licensed under the [MPL v2](https://www.mozilla.org/en-US/MPL/2.
 Step 1 : To install the BigAnimal provider, copy and paste this code into your Terraform configuration provider.tf file.
 
 ```hcl
-terraform {
-  required_providers {
-    biganimal = {
-      source  = "EnterpriseDB/biganimal"
-      version = "0.6.1"
-    }
-  }
-}
-
+# Configure the BigAnimal Provider
 provider "biganimal" {
-  # Configuration options
-  ba_bearer_token = <redacted> // See Getting an API Token section for details
-  // ba_api_uri   = "https://portal.biganimal.com/api/v3" // Optional
+  #//ba_bearer_token = "${var.BA_BEARER_TOKEN}"//
+  #ba_bearer_token = var.BA_BEARER_TOKEN
+
+#  variable "BA_BEARER_TOKEN" {
+#  type        = string
+#  description = "BA_BEARER_TOKEN"
+#  default     = ""
+#}
+
+  #//ba_api_uri   = "https://portal.biganimal.com/api/v3" // Optional
+  ba_api_uri   = "https://portal.biganimal.com/api/v3" 
 }
 ```
 ## Let us declare the data-sources and variables
@@ -219,8 +219,7 @@ source ./.profile
 ```console
 ba_api_get_call
 export_BA_env_vars
-ba_get_default_project_id
-export TF_VAR_cluster_name=<use the cluster name if you want to create>
+export TF_VAR_cluster_name=<type the name of the test cluster>
 ```
 ## Let us start with the Terraform initialize your configuration
 In order to generate your execution plan, Terraform needs to install the BigAnimal providers and modules referenced by your configuration defined in above steps.
