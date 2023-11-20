@@ -12,5 +12,3 @@ provider "biganimal" {
   #//ba_api_uri   = "https://portal.biganimal.com/api/v3" // Optional
   ba_api_uri   = "https://portal.biganimal.com/api/v3" 
 }
-
-
